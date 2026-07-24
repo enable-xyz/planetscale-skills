@@ -89,6 +89,10 @@ aggressive cutover as the database default.
 
 Recommend for production deploy requests in multi-admin organizations.
 
+In a single-admin organization, approval alone is not a guard against agents: that admin can
+open and approve the same deploy request. Prefer a separate agent identity, or a service token
+that cannot approve deploy requests.
+
 ### Gated deployments
 
 Recommend when cutover timing and human control matter.
