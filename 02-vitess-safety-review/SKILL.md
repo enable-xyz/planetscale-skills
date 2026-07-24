@@ -40,6 +40,10 @@ Recommend:
 
 - Require deploy requests for production schema changes.
 - Enable administrator approval for production deploy requests when there is more than one administrator.
+- In a single-admin organization, administrator approval does not stop an agent that acts as that admin:
+  the admin who opens a deploy request can also approve it. If the goal is to keep agents from
+  self-approving, give the agent a separate user, or a service token without deploy request
+  approval permission.
 - Prefer normal safe deployments over instant deployments unless the migration is known to be instant-safe and the rollback story is acceptable.
 - Use gated deployment when cutover timing matters.
 - Treat “force cutover now” as an operator-controlled action for delayed
