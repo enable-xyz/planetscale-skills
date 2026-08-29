@@ -1,7 +1,6 @@
 ---
 name: planetscale-safe-orchestrator
 description: Master skill that runs the full PlanetScale safe best-practices assessment — inventory, engine review, Insights, Traffic Control, webhooks, schema recommendations, codebase instrumentation, and agent operating model — then produces a unified recommendations report. Never applies changes without explicit approval. Use when the user asks to run the full assessment, all skills, or PlanetScale best-practices review.
-disable-model-invocation: true
 ---
 
 # PlanetScale safe orchestrator (master skill)
