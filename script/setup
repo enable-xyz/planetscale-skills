@@ -16,7 +16,7 @@ install_to() {
   dest=$1
   mkdir -p "$dest"
   count=0
-  for skill in "$REPO_DIR"/[0-9]*; do
+  for skill in "$REPO_DIR"/planetscale-*; do
     [ -f "$skill/SKILL.md" ] || continue
     name=$(basename "$skill")
     mkdir -p "$dest/$name"
