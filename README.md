@@ -35,13 +35,13 @@ agent-specific: no plugins, no custom tools, no proprietary rendering.
 
    ```sh
    brew install planetscale/tap/pscale   # or see planetscale.com/cli
-   pscale agent-guide --format json      # CLI conventions (or load skill 14-pscale-cli-automation)
+   pscale agent-guide --format json      # CLI conventions (or load skill planetscale-pscale-cli-automation)
    pscale auth check --format json       # verify auth; follow next_steps if action_required
    pscale org list --format json         # verify access
    ```
 
    Agents should always pass `--format json` on `pscale` commands. Use `pscale sql`
-   for non-interactive queries, not `pscale shell`. See skill `14-pscale-cli-automation`
+   for non-interactive queries, not `pscale shell`. See skill `planetscale-pscale-cli-automation`
    or the CLI repo `AGENTS.md` for full conventions.
 
 2. **Optional: PlanetScale MCP server.** The skills prefer the
@@ -81,7 +81,7 @@ script/setup ~/.codex/skills          # or wherever your agent reads skills
 npx skills add planetscale/skills -g -y
 ```
 
-**Manual.** Copy the numbered directories into your agent's skills
+**Manual.** Copy the `planetscale-*` directories into your agent's skills
 location:
 
 | Agent | User-level | Project-level |
@@ -93,11 +93,10 @@ location:
 
 One constraint in all cases: the directories must stay siblings — skills
 reference each other by relative path
-(`../11-change-gates-and-approval-contract/SKILL.md`). Some installers
-(including the Skills CLI) rename the folders to their frontmatter names
-(`planetscale-change-gates-and-approval-contract`); agents should resolve
-a missing numbered path by locating the sibling skill with the matching
-frontmatter `name` instead.
+(`../planetscale-change-gates-and-approval-contract/SKILL.md`). Each folder is
+named after its frontmatter `name`, as the agent-skills specification
+requires, so installers that rename folders by frontmatter name (including
+the Skills CLI) leave those paths intact.
 
 ## Usage
 
@@ -187,8 +186,8 @@ For unattended runs (cron, CI, agent schedulers), interactive
 acknowledgment is replaced by a **standing authorization**: a committed
 file naming the owner, scope, allowed operations, numeric bounds, expiry
 date, and a status delivery channel. Details and templates are in
-`13-autonomous-execution-mode/SKILL.md`. Recommended loops (see
-`09-mcp-agent-operating-model/SKILL.md`):
+`planetscale-autonomous-execution-mode/SKILL.md`. Recommended loops (see
+`planetscale-mcp-agent-operating-model/SKILL.md`):
 
 - **Recommendation-to-PR** (daily) — open schema recommendations become
   ready-to-ship branch + PR + deploy request units. No authorization
@@ -203,7 +202,7 @@ date, and a status delivery channel. Details and templates are in
 ## Safety model
 
 Every operation the agent might take is classified before it happens
-(`11-change-gates-and-approval-contract/SKILL.md`):
+(`planetscale-change-gates-and-approval-contract/SKILL.md`):
 
 | Class | Scope | Default |
 |---|---|---|
@@ -222,25 +221,26 @@ run produces an audit log. Reports end with the same contract line:
 
 ## The skills
 
-| # | Skill | Role |
-|---|---|---|
-| 00 | safe-orchestrator | Runs the full assessment end to end; the usual entry point |
-| 01 | readonly-inventory | Evidence collection: org, branches, backups, webhooks, roles |
-| 02 | vitess-safety-review | Vitess: safe migrations, deploy requests, revert, sharding |
-| 03 | postgres-safety-review | Postgres: roles, pg_strict, Traffic Control, PITR, pooling |
-| 04 | query-insights-and-tags | Query behavior, anomaly review, tag coverage and cardinality |
-| 05 | traffic-control-recommendations | Warn-first budget plans for Postgres traffic slices |
-| 06 | webhook-automation-recommendations | Event routing, receiver requirements, automation flows |
-| 07 | schema-recommendations-agent-loop | Recommendation triage into reviewable units |
-| 08 | codebase-sqlcommenter-instrumentation | Repository review and query-tagging PR plans |
-| 09 | mcp-agent-operating-model | Agent/MCP configuration and scheduled loop catalog |
-| 10 | customer-report-template | Report format, tone, and evidence requirements |
-| 11 | change-gates-and-approval-contract | The Class A–E permission model |
-| 12 | best-practices-matrix | Per-engine coverage checklist so assessments miss nothing |
-| 13 | autonomous-execution-mode | Risk-acknowledged autonomy: contract, status protocol, halt rules |
+| Skill | Role |
+|---|---|
+| planetscale-safe-orchestrator | Runs the full assessment end to end; the usual entry point |
+| planetscale-readonly-inventory | Evidence collection: org, branches, backups, webhooks, roles |
+| planetscale-vitess-safety-review | Vitess: safe migrations, deploy requests, revert, sharding |
+| planetscale-postgres-safety-review | Postgres: roles, pg_strict, Traffic Control, PITR, pooling |
+| planetscale-query-insights-and-tags | Query behavior, anomaly review, tag coverage and cardinality |
+| planetscale-traffic-control-recommendations | Warn-first budget plans for Postgres traffic slices |
+| planetscale-webhook-automation-recommendations | Event routing, receiver requirements, automation flows |
+| planetscale-schema-recommendations-agent-loop | Recommendation triage into reviewable units |
+| planetscale-codebase-sqlcommenter-instrumentation | Repository review and query-tagging PR plans |
+| planetscale-mcp-agent-operating-model | Agent/MCP configuration and scheduled loop catalog |
+| planetscale-customer-report-template | Report format, tone, and evidence requirements |
+| planetscale-change-gates-and-approval-contract | The Class A–E permission model |
+| planetscale-best-practices-matrix | Per-engine coverage checklist so assessments miss nothing |
+| planetscale-autonomous-execution-mode | Risk-acknowledged autonomy: contract, status protocol, halt rules |
+| planetscale-pscale-cli-automation | Driving `pscale` headless: `--format json`, auth check, `pscale sql` |
 
 Each skill is a standalone `SKILL.md` — readable as documentation,
-executable by the agent. Start with `00-safe-orchestrator/SKILL.md` to
+executable by the agent. Start with `planetscale-safe-orchestrator/SKILL.md` to
 see how a full run fits together.
 
 ## Disclaimer
